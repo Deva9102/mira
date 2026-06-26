@@ -13,6 +13,7 @@ from mira.sources.sympy_ode.extractors import (
     MarkerExtractor,
     XmlExtractor,
     Pix2TextExtractor,
+    DoclingExtractor,
 )
 from mira.sources.sympy_ode.llm_util import (
     execute_template_model_from_sympy_odes,
@@ -86,6 +87,10 @@ def get_template_model_from_pmid(pmid: str, extractor: str = "mineru",
         extractor_obj = Pix2TextExtractor(pmid, pmc, paper_base,
                                           pmid_to_download_mapping,
                                           ode_extraction_method)
+    elif extractor == "docling":
+        extractor_obj = DoclingExtractor(pmid, pmc, paper_base,
+                                         pmid_to_download_mapping,
+                                         ode_extraction_method)
     else:
         raise ValueError(f"Unknown extractor: {extractor}")
 
